@@ -2,503 +2,455 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inscripción · Semillero de Investigación</title>
- <style>
-  :root{
-    --tinta: #10251f;
-    --verde-hoja: #1f4d3d;
-    --verde-claro: #cfe3d9;
-    --papel: #f6f3ea;
-    --papel-borde: #d8d0bd;
-    --ambar: #c17a35;
-    --texto: #1c2422;
-    --texto-suave: #5a655f;
-    --error: #b3402f;
-    --font-display: 'Iowan Old Style', 'Palatino Linotype', Georgia, 'Times New Roman', serif;
-    --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'Courier New', monospace;
-  }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semillero de Investigaciones Biológicas del Trópico · Sitio oficial</title>
+<meta name="description" content="Sitio oficial del Semillero de Investigaciones Biológicas del Trópico: eventos, proyecto, formularios, encuestas e inscripción de nuevos integrantes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@400;500;600&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+document.documentElement.classList.add('js');
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&(!localStorage.getItem('intro-vista')||/[?&]intro/.test(location.search)))document.documentElement.classList.add('con-intro')}catch(e){}
+</script>
+<style>
+:root{
+  --negro:#06180c; --negro-2:#020302;
+  --verde:#26a60c;          /* reemplaza al amarillo del sitio de referencia */
+  --verde-hoja:#315a2e; --verde-claro:#b2e0b7;
+  --papel:#e1cdbe; --borde:#e9e2d0; --texto:#1c2422; --suave:#32836f; --blanco:#f6f6f8;
+  --f-display:'Anton','Impact',sans-serif;
+  --f-tech:'Chakra Petch','Segoe UI',sans-serif;
+  --f-body:'Noto Sans','Segoe UI',Arial,sans-serif;
+} 
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:#fff;color:var(--texto);font-family:var(--f-body);line-height:1.7}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--verde);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
-  *{ box-sizing: border-box; }
+/* ---------- Espacios para imágenes (se llenan al subir el archivo a /img) ---------- */
+.slot{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;
+  border:2px dashed rgba(127,211,107,.55);background:rgba(152, 232, 131, 0.06);color:var(--suave);
+  font-family:var(--f-tech);font-size:.8rem;padding:.6rem;overflow:hidden}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot.contain img{object-fit:contain;padding:.6rem}
 
-  body{
-    margin:0;
-    background: var(--papel);
-    color: var(--texto);
-    font-family: var(--font-body);
-    line-height:1.5;
-  }
+/* ---------- Encabezado ---------- */
+.header{position:fixed;inset:0 0 auto 0;z-index:50;background:var(--negro);border-bottom:1px solid rgba(127,211,107,.25)}
+.header .in{max-width:1180px;margin:0 auto;padding:.5rem 1.2rem;display:flex;align-items:center;gap:1rem;min-height:68px}
+.nav{margin-left:auto}
+.nav ul{display:flex;gap:1.3rem;list-style:none;margin:0;padding:0;align-items:center}
+.nav a{color:var(--verde-claro);text-decoration:none;font-family:var(--f-tech);font-weight:500;font-size:.9rem;display:block;line-height:1.2;text-align:center}
+.nav a small{display:block;font-size:.66rem;color:rgba(207,227,217,.55);font-weight:400}
+.nav a:hover{color:var(--verde)}
+.btn-contacto{background:var(--verde);color:var(--negro)!important;padding:.55rem 1.1rem;border-radius:30px;font-weight:600}
+.btn-contacto small{color:rgba(12,21,17,.65)!important}
+.burger{display:none;margin-left:auto;background:none;border:1px solid var(--verde);color:var(--verde);border-radius:6px;padding:.45rem .7rem;font:600 .9rem var(--f-tech);cursor:pointer}
+@media(max-width:980px){
+  .burger{display:block}
+  .nav{position:absolute;top:100%;left:0;right:0;background:var(--negro);display:none;padding:1rem 1.2rem 1.4rem;border-bottom:1px solid rgba(127,211,107,.25)}
+  .nav.abierto{display:block}
+  .nav ul{flex-direction:column;align-items:stretch;gap:.2rem}
+  .nav a{text-align:left;padding:.6rem 0}
+  .btn-contacto{text-align:center!important;margin-top:.5rem}
+}
 
-  /* ---------- Encabezado ---------- */
-  header.hero{
-    background: var(--tinta);
-    color: var(--verde-claro);
-    padding: 3rem 1.5rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
+/* ---------- Secciones ---------- */
+section{position:relative}
+.wrap{max-width:1000px;margin:0 auto;padding:0 1.4rem}
+.titulo{font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.05;margin:0 0 .3rem;letter-spacing:.01em}
+.titulo-ja{font-family:var(--f-tech);font-weight:500;font-size:.95rem;margin:0 0 2rem;color:var(--suave)}
+.oscuro{background:var(--negro);color:var(--verde-claro)}
+.oscuro .titulo{color:var(--verde)}
+.oscuro .titulo-ja{color:rgba(207,227,217,.7)}
+.pad{padding:5rem 0}
 
-  header.hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image: repeating-linear-gradient(
-      45deg, rgba(207,227,217,0.04) 0, rgba(207,227,217,0.04) 1px,
-      transparent 1px, transparent 14px
-    );
-    pointer-events:none;
-  }
+/* Nosotros / Proyecto */
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.tarjeta{border-left:4px solid var(--verde-hoja);padding:.2rem 0 .2rem 1.2rem}
+.tarjeta h3{font-family:var(--f-tech);font-size:1.15rem;margin:0 0 .5rem;color:var(--verde-hoja)}
+.tarjeta p{margin:0;font-size:.97rem}
+@media(max-width:760px){.dos{grid-template-columns:1fr}}
+.proyecto-box{border:1px solid rgba(127,211,107,.35);border-radius:10px;padding:1.8rem;background:var(--negro-2)}
+.proyecto-box h3{font-family:var(--f-tech);font-size:clamp(1.15rem,3vw,1.5rem);line-height:1.35;margin:0 0 .8rem;color:var(--blanco)}
+.etiqueta{display:inline-block;border:1px solid var(--verde);color:var(--verde);border-radius:30px;padding:.15rem .8rem;font:500 .8rem var(--f-tech);margin:0 .4rem .6rem 0}
 
-  .hero-inner{
-    max-width: 760px;
-    margin: 0 auto;
-    display:flex;
-    align-items:center;
-    gap: 1.5rem;
-    position: relative;
-    z-index:1;
-  }
+/* Formularios y encuestas */
+.enlaces-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:760px){.enlaces-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.enlaces-grid{grid-template-columns:1fr}}
+.btn-enlace{display:flex;align-items:center;justify-content:center;text-align:center;min-height:84px;padding:.9rem 1rem;border-radius:8px;font-family:var(--f-tech);font-weight:600;color:#fff;text-decoration:none;transition:transform .15s,filter .15s}
+.btn-enlace:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn-verde{background:#2e8b57}.btn-celeste{background:#3aa7d9}.btn-morado{background:#7b4fb3}
+.btn-rosado{background:#d6456b}.btn-encuesta{background:#c17a35}.btn-simposio{background-color: #163c2f;}
+/* Registro */
+#registro{background:var(--papel)}
+form{background:#fffdf7;border:1px solid var(--borde);border-radius:10px;padding:2rem clamp(1.2rem,4vw,2.4rem)}
+.grupo{margin-bottom:1.4rem}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:560px){.fila{grid-template-columns:1fr}}
+label{display:block;font-size:.84rem;font-weight:600;color:var(--verde-hoja);margin-bottom:.35rem}
+label .req{color:#c17a35;margin-left:.15rem}
+input[type=text],input[type=email],input[type=tel],input[type=date]{width:100%;padding:.65rem .75rem;font:inherit;font-size:.95rem;color:var(--texto);background:#fff;border:1.5px solid var(--borde);border-radius:6px}
+input:focus{outline:none;border-color:var(--verde-hoja);box-shadow:0 0 0 3px rgba(31,77,61,.16)}
+fieldset{border:1px solid var(--borde);border-radius:8px;padding:1.1rem 1.2rem;margin:1.8rem 0 1.4rem;background:var(--papel)}
+legend{font-family:var(--f-tech);font-size:.85rem;font-weight:600;color:var(--verde-hoja);padding:0 .4rem}
+.autorizacion-texto{font-size:.82rem;margin:0 0 .9rem;line-height:1.55}
+.checkbox-linea{display:flex;align-items:flex-start;gap:.6rem}
+.checkbox-linea input{margin-top:.25rem;width:17px;height:17px;accent-color:var(--verde-hoja);flex-shrink:0}
+.checkbox-linea label{font-weight:500;margin:0;color:var(--texto)}
+button.enviar{width:100%;padding:.9rem 1rem;font:600 .98rem var(--f-body);color:var(--blanco);background:var(--verde-hoja);border:none;border-radius:7px;cursor:pointer}
+button.enviar:hover{background:#163c2f}
+button.enviar:disabled{background:#a9b6b0;cursor:not-allowed}
+.paso-whatsapp{display:none;margin-top:1.6rem;padding:1.4rem 1.2rem;border-radius:8px;background:var(--verde-claro);border:1px solid #b7d2c3;text-align:center}
+.paso-whatsapp.visible{display:block}
+.paso-whatsapp p{margin:0 0 .9rem;font-size:.92rem;color:var(--verde-hoja)}
+.boton-whatsapp{display:inline-block;background:var(--verde-hoja);color:var(--blanco);text-decoration:none;font-weight:600;padding:.75rem 1.4rem;border-radius:30px}
 
-  .logo-slot{
-    width: 130px;
-    height: 130px;
-    flex-shrink:0;
-    border-radius: 50%;
-    border: 2px dashed rgba(207,227,217,0.5);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-size: 0.68rem;
-    color: rgba(207,227,217,0.7);
-    background: rgba(207,227,217,0.05);
-    overflow:hidden;
-  }
 
-  .logo-slot img{
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    border-radius:50%;
-  }
+/* ---------- Logos del encabezado (se ven completos) ---------- */
+.logos{display:flex;align-items:center;gap:.6rem;background:#fff;border-radius:10px;padding:.3rem .75rem;text-decoration:none}
+.l-sem{height:44px;width:auto;mix-blend-mode:multiply}
+.l-uni{height:30px;width:auto}
+.l-sep{width:1px;height:30px;background:#cfd8d2}
+@media(max-width:520px){.l-sem{height:36px}.l-uni{height:24px}.l-sep{height:24px}.logos{padding:.25rem .55rem}}
 
-  .hero-text .eyebrow{
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.72rem;
-    color: var(--ambar);
-    margin: 0 0 0.4rem;
-  }
+/* ---------- Portada + próximos eventos ---------- */
+#portada{position:relative;padding-top:70px;background:var(--negro);color:var(--blanco);overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(100deg,rgba(2,10,6,.93),rgba(6,24,12,.72) 60%,rgba(6,24,12,.55)),url(img/fondo.jpg) center/cover;animation:kb 26s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.08)}}
+.hero-grid{position:relative;max-width:1180px;margin:0 auto;padding:3rem 1.4rem 3.5rem;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:2.4rem;align-items:center}
+.lema{font-family:var(--f-display);text-transform:uppercase;font-size:clamp(3.4rem,10vw,7rem);line-height:.92;margin:0}
+.lema span{display:block}.lema .v{color:var(--verde)}
+.bajada{font-family:var(--f-tech);color:rgba(207,227,217,.88);margin:1.2rem 0 1.6rem;max-width:40ch}
+.cta{display:inline-block;background:var(--verde);color:var(--negro);font-family:var(--f-tech);font-weight:600;text-decoration:none;padding:.8rem 1.6rem;border-radius:30px;transition:transform .15s}
+.cta:hover{transform:translateY(-2px)}
+.cta.sec{background:transparent;color:var(--verde);border:1.5px solid var(--verde);margin-left:.6rem}
+.car{position:relative;min-width:0}
+.car-h{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-tech);font-size:.95rem;color:var(--verde);margin:0 0 .7rem}
+.car-hint{font-size:.78rem;color:rgba(207,227,217,.7);font-weight:400}
+.car-track{display:flex;gap:1rem;height:clamp(380px,64vh,580px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.car-track::-webkit-scrollbar{display:none}
+.slide{position:relative;flex:0 0 auto;height:100%;max-width:100%;scroll-snap-align:center;border-radius:10px;overflow:hidden;display:block;box-shadow:0 10px 30px rgba(0,0,0,.45);transition:transform .35s,box-shadow .35s}
+.slide img{height:100%;width:auto;max-width:100%;object-fit:contain;transition:transform .5s}
+.slide:hover{transform:scale(1.02);box-shadow:0 14px 40px rgba(38,166,12,.45)}
+.slide::after{content:attr(data-label);position:absolute;left:50%;bottom:14px;transform:translate(-50%,12px);background:var(--verde);color:var(--negro);font:600 .85rem var(--f-tech);padding:.45rem 1rem;border-radius:30px;opacity:0;transition:.3s;white-space:nowrap}
+.slide:hover::after,.slide:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+.slide.vacio{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;text-align:center;border:2px dashed rgba(38,166,12,.6);background:rgba(38,166,12,.08);font:.8rem var(--f-tech);color:var(--verde-claro);padding:1rem}
+.slide.vacio img{position:absolute;opacity:0;width:1px;height:1px}
+.slide:not(.vacio) span{display:none}
+.car-b{position:absolute;top:55%;z-index:3;width:42px;height:42px;border-radius:50%;border:none;background:var(--verde);color:var(--negro);font-size:1.5rem;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.car-b.prev{left:-12px}.car-b.next{right:-12px}
+.car-dots{display:flex;justify-content:center;gap:.5rem;margin-top:.9rem}
+.car-dots i{width:9px;height:9px;border-radius:9px;background:rgba(207,227,217,.35);cursor:pointer;transition:.3s}
+.car-dots i.on{width:26px;background:var(--verde)}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding-top:2rem}.cta.sec{margin:.6rem 0 0}.car-b.prev{left:4px}.car-b.next{right:4px}}
 
-  .hero-text h1{
-    font-family: var(--font-display);
-    font-size: clamp(1.6rem, 4vw, 2.3rem);
-    margin: 0 0 0.35rem;
-    font-weight: 600;
-    color: #fdfcf7;
-  }
+/* ---------- Memorias y redes ---------- */
+.mem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.1rem}
+.mem{position:relative;aspect-ratio:4/5;padding:0;border:1px solid rgba(38,166,12,.35);border-radius:10px;overflow:hidden;background:#0d2a17;cursor:zoom-in;color:var(--verde-claro);font:.78rem var(--f-tech);display:flex;align-items:center;justify-content:center;text-align:center;transition:transform .35s,box-shadow .35s,border-color .35s}
+.mem img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .5s}
+.mem.video img{object-fit:cover}
+.mem:hover,.mem:focus-visible{transform:scale(1.05);z-index:2;border-color:var(--verde);box-shadow:0 16px 40px rgba(38,166,12,.4)}
+.mem:hover img{transform:scale(1.06)}
+.mem .ic{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:50%;background:var(--verde);color:var(--negro);display:flex;align-items:center;justify-content:center;font-weight:700;opacity:0;transform:scale(.6);transition:.3s}
+.mem:hover .ic,.mem:focus-visible .ic{opacity:1;transform:none}
+.mem.video .ic{opacity:1;transform:none;right:50%;bottom:50%;margin:0 -26px -26px 0;width:52px;height:52px;font-size:1.3rem;box-shadow:0 0 0 8px rgba(38,166,12,.3)}
+.mem span{position:relative;padding:.8rem}
+.mem img+span{display:none}
+.redes-t{font-family:var(--f-tech);font-weight:600;margin:3rem 0 .9rem;color:var(--verde-claro)}
+.redes{display:flex;flex-wrap:wrap;gap:.8rem}
+.redes a{border:1.5px solid var(--verde);color:var(--verde);text-decoration:none;font-family:var(--f-tech);font-weight:600;padding:.65rem 1.3rem;border-radius:30px;transition:background .2s,color .2s,transform .2s}
+.redes a:hover{background:var(--verde);color:var(--negro);transform:translateY(-3px)}
 
-  .hero-text p{
-    margin:0;
-    font-size: 0.95rem;
-    color: rgba(207,227,217,0.85);
-    max-width: 46ch;
-  }
+/* ---------- Visor ampliado ---------- */
+.lb{position:fixed;inset:0;z-index:150;background:rgba(2,8,4,.94);display:none;align-items:center;justify-content:center;padding:3.5rem 3.5rem}
+.lb.abierto{display:flex;animation:fade .3s}
+.lb-body{display:flex;justify-content:center;animation:pop .4s cubic-bezier(.2,.8,.2,1)}
+.lb-body img{max-width:min(92vw,1000px);max-height:86vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 70px #000}
+.lb-body iframe,.lb-body video{width:min(92vw,900px);aspect-ratio:16/9;border:0;border-radius:8px;background:#000}
+.lb-body iframe.alto{aspect-ratio:9/16;width:auto;height:min(84vh,680px)}
+.lb button{position:absolute;border:none;background:var(--verde);color:var(--negro);width:44px;height:44px;border-radius:50%;font-size:1.6rem;line-height:1;cursor:pointer}
+.lb-x{top:14px;right:14px}.lb-p{left:12px;top:50%}.lb-n{right:12px;top:50%}
+@keyframes fade{from{opacity:0}}@keyframes pop{from{opacity:0;transform:scale(.8)}}
+@media(max-width:600px){.lb{padding:3.5rem .5rem}}
 
-  @media (max-width:520px){
-    .hero-inner{ flex-direction: column; text-align:center; }
-    .logo-slot{ width: 104px; height: 104px; }
-  }
+/* ---------- Pie con colaboradores ---------- */
+footer{background:var(--negro);color:rgba(207,227,217,.75);padding:3.5rem 0 2rem;font-family:var(--f-tech);font-size:.82rem}
+.foot-t{font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:2rem;color:var(--verde);margin:0 0 .3rem}
+.foot-s{margin:0 0 1.4rem}
+.col-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem}
+.col-grid .slot{aspect-ratio:3/2;border-radius:8px;background:#fff;color:#7a857f}
+@media(max-width:700px){.col-grid{grid-template-columns:repeat(2,1fr)}}
+.foot-marca{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;border-top:1px solid rgba(38,166,12,.3);padding-top:1.6rem}
 
-  /* ---------- Galería de eventos ---------- */
-  .galeria{
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 1.6rem 1.5rem 0;
-  }
-
-  .galeria h2{
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.72rem;
-    color: var(--texto-suave);
-    margin: 0 0 0.8rem;
-  }
-
-  .galeria-grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.6rem;
-  }
-
-  .foto-slot{
-    aspect-ratio: 1 / 1;
-    border: 1.5px dashed var(--papel-borde);
-    border-radius: 4px;
-    background: #fffdf7;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size: 0.62rem;
-    color: var(--texto-suave);
-    text-align:center;
-    padding: 0.4rem;
-    overflow:hidden;
-  }
-
-  .foto-slot img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:2px;
-  }
-
-  @media (max-width:560px){
-    .galeria-grid{ grid-template-columns: repeat(2, 1fr); }
-  }
-
-  /* ---------- Formulario ---------- */
-  main{
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 2.2rem 1.5rem 4rem;
-  }
-
-  form{
-    background: #fffdf7;
-    border: 1px solid var(--papel-borde);
-    border-radius: 10px;
-    padding: 2rem clamp(1.2rem, 4vw, 2.4rem);
-    box-shadow: 0 1px 0 rgba(16,37,31,0.03);
-  }
-
-  .grupo{
-    margin-bottom: 1.4rem;
-  }
-
-  .fila{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-
-  @media (max-width:560px){
-    .fila{ grid-template-columns: 1fr; }
-  }
-
-  label{
-    display:block;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--verde-hoja);
-    margin-bottom: 0.35rem;
-  }
-
-  label .req{
-    color: var(--ambar);
-    margin-left: 0.15rem;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="date"],
-  select{
-    width:100%;
-    padding: 0.65rem 0.75rem;
-    font-size: 0.95rem;
-    font-family: var(--font-body);
-    color: var(--texto);
-    background: #fff;
-    border: 1.5px solid var(--papel-borde);
-    border-radius: 6px;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  }
-
-  input:focus, select:focus{
-    outline: none;
-    border-color: var(--verde-hoja);
-    box-shadow: 0 0 0 3px rgba(31,77,61,0.14);
-  }
-
-  .ayuda{
-    font-size: 0.76rem;
-    color: var(--texto-suave);
-    margin-top: 0.3rem;
-  }
-
-  fieldset{
-    border: 1px solid var(--papel-borde);
-    border-radius: 8px;
-    padding: 1.1rem 1.2rem;
-    margin: 1.8rem 0 1.4rem;
-    background: var(--papel);
-  }
-
-  fieldset legend{
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--verde-hoja);
-    padding: 0 0.4rem;
-  }
-
-  .autorizacion-texto{
-    font-size: 0.82rem;
-    color: var(--texto);
-    margin: 0 0 0.9rem;
-    line-height:1.55;
-  }
-
-  .checkbox-linea{
-    display:flex;
-    align-items:flex-start;
-    gap: 0.6rem;
-  }
-
-  .checkbox-linea input[type="checkbox"]{
-    margin-top: 0.2rem;
-    width: 17px;
-    height: 17px;
-    accent-color: var(--verde-hoja);
-    flex-shrink:0;
-  }
-
-  .checkbox-linea label{
-    font-weight: 500;
-    font-size: 0.85rem;
-    color: var(--texto);
-    margin:0;
-  }
-
-  button.enviar{
-    width:100%;
-    padding: 0.85rem 1rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #fdfcf7;
-    background: var(--verde-hoja);
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-
-  button.enviar:hover{ background: #163c2f; }
-  button.enviar:disabled{
-    background: #a9b6b0;
-    cursor: not-allowed;
-  }
-
-  /* ---------- Paso 2: WhatsApp ---------- */
-  .paso-whatsapp{
-    display:none;
-    margin-top: 1.6rem;
-    padding: 1.4rem 1.2rem;
-    border-radius: 8px;
-    background: var(--verde-claro);
-    border: 1px solid #b7d2c3;
-    text-align:center;
-  }
-
-  .paso-whatsapp.visible{ display:block; }
-
-  .paso-whatsapp p{
-    margin: 0 0 0.9rem;
-    font-size: 0.9rem;
-    color: var(--verde-hoja);
-  }
-
-  .boton-whatsapp{
-    display:inline-flex;
-    align-items:center;
-    gap: 0.5rem;
-    background: #1f4d3d;
-    color: #fdfcf7;
-    text-decoration:none;
-    font-weight: 600;
-    font-size: 0.92rem;
-    padding: 0.75rem 1.4rem;
-    border-radius: 30px;
-    transition: transform 0.15s ease, background 0.15s ease;
-  }
-
-  .boton-whatsapp:hover{
-    background: #163c2f;
-    transform: translateY(-1px);
-  }
-
-  footer{
-    text-align:center;
-    padding: 1.4rem 1rem 2.4rem;
-    font-size: 0.75rem;
-    color: var(--texto-suave);
-  }
-  /* ---------- Botones de enlaces ---------- */
-  .enlaces{
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 2.2rem 1.5rem 0;
-  }
-
-  .enlaces h2{
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.72rem;
-    color: var(--texto-suave);
-    margin: 0 0 0.8rem;
-  }
-
-  .enlaces-grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
-  }
-
-  @media (max-width:640px){
-    .enlaces-grid{ grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (max-width:420px){
-    .enlaces-grid{ grid-template-columns: 1fr; }
-  }
-
-  .btn-enlace{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    min-height: 64px;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.92rem;
-    color: #fff;
-    text-decoration:none;
-    transition: transform 0.15s ease, filter 0.15s ease;
-  }
-
-  .btn-enlace:hover{
-    transform: translateY(-2px);
-    filter: brightness(1.08);
-  }
-
-  .btn-verde{ background: #2e8b57; }
-  .btn-celeste{ background: #3aa7d9; }
-  .btn-morado{ background: #7b4fb3; }
-  .btn-rosado{ background: #d6456b; }
-  .btn-encuesta{ background: #c17a35; }
-   
+/* ---------- Intro y animaciones al hacer scroll ---------- */
+.intro{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;cursor:pointer}
+.con-intro .intro{display:flex}
+html.con-intro,html.con-intro body{overflow:hidden}
+.i-p{position:absolute;left:0;right:0;height:50.2%;background:var(--negro);transition:transform .9s cubic-bezier(.7,0,.2,1)}
+.i-p.t{top:0}.i-p.b{bottom:0}
+.intro.salir .t{transform:translateY(-100%)}.intro.salir .b{transform:translateY(100%)}
+.i-c{position:relative;text-align:center;padding:1rem;transition:opacity .4s,transform .6s}
+.intro.salir .i-c{opacity:0;transform:scale(1.15)}
+.i-logo{display:inline-block;background:#fff;border-radius:18px;padding:.9rem 1.4rem;animation:pop .9s cubic-bezier(.2,.8,.2,1) both}
+.i-logo img{height:clamp(110px,24vw,170px);width:auto;mix-blend-mode:multiply}
+.i-t{font-family:var(--f-tech);color:var(--verde-claro);margin:1.4rem 0 1rem;animation:subir .8s .5s both}
+.i-bar{width:min(260px,70vw);height:3px;margin:0 auto;background:rgba(207,227,217,.2);overflow:hidden;border-radius:3px}
+.i-bar i{display:block;height:100%;background:var(--verde);animation:carga 2s .3s ease-in-out both}
+@keyframes carga{from{width:0}to{width:100%}}
+@keyframes subir{from{opacity:0;transform:translateY(16px)}}
+.js .rv{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--d,0)*100ms)}
+.js .rv.izq{transform:translateX(-40px)}.js .rv.der{transform:translateX(40px)}.js .rv.zoom{transform:scale(.9)}
+.js .rv.in{opacity:1;transform:none}
+.titulo::after{content:"";display:block;height:4px;width:0;background:var(--verde);margin-top:.5rem;transition:width .9s .35s}
+.titulo.in::after,.titulo:not(.rv)::after{width:70px}
 </style>
 </head>
 <body>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="i-p t"></div><div class="i-p b"></div>
+  <div class="i-c">
+    <div class="i-logo"><img src="img/logo-semilleroiibt.jpeg" alt="" onerror="this.onerror=null;this.src='logo-semilleroiibt.jpg'"></div>
+    <p class="i-t">Semillero de Investigaciones Biológicas del Trópico</p>
+    <div class="i-bar"><i></i></div>
+  </div>
+</div>
 
-<header class="hero">
-  <div class="hero-inner">
-    <div class="logo-slot" id="logo-slot">
-      <img src="logo-semilleroiibt.jpg" alt="Logo del semillero">
-    </div>
-    <div class="hero-text">
-      <p class="eyebrow">Semillero de Investigación</p>
-      <h1>Actividades IIBT</h1>
-      <p>Puedes realizar el registro para admision al semillero o resolver las encuestas.</p>
-    </div>
+
+<!-- ============ ENCABEZADO ============ -->
+<header class="header">
+  <div class="in">
+    <a class="logos" href="#portada" aria-label="Ir al inicio">
+      <img class="l-sem" src="img/logo-semilleroiibt.jpeg" alt="Semillero IIBT" onerror="this.onerror=null;this.src='logo-semilleroiibt.jpg'">
+      <span class="l-sep"></span>
+      <img class="l-uni" src="img/logo-universidad.png" alt="Universidad de Córdoba" onerror="this.onerror=null;this.src='logo-universidad.png'">
+    </a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menú</button>
+    <nav class="nav" id="menu" aria-label="Principal">
+      <ul>
+        <li><a href="#portada">Portada<small>Eventos</small></a></li>
+        <li><a href="#nosotros">Nosotros<small>Semillero e IIBT</small></a></li>
+        <li><a href="#proyecto">Proyectos<small>Retos Unicórdoba</small></a></li>
+        <li><a href="#formularios">Formularios<small>Encuestas</small></a></li>
+        <li><a href="#memorias">Memorias<small>Videos y redes</small></a></li>
+        <li><a class="btn-contacto" href="#registro">Únete<small>Inscripción</small></a></li>
+      </ul>
+    </nav>
   </div>
 </header>
 
 <main>
-  <section class="enlaces">
-    <h2>Actividades y formularios</h2>
+
+<!-- ============ 1. PORTADA + PRÓXIMOS EVENTOS ============ -->
+<section id="portada">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-txt">
+      <h1 class="lema"><span>IIBT</span><span class="v">Semillero</span></h1>
+      <p class="bajada">Aquí promocionamos los próximos eventos del semillero.</p>
+      <a class="cta" href="#formularios">Inscribirme a un evento</a>
+      <a class="cta sec" href="#registro">Ser parte del semillero</a>
+    </div>
+    <div class="car" id="car">
+      <h2 class="car-h"><span>Próximos eventos y anuncios</span><span class="car-hint">Desliza y toca para abrir</span></h2>
+      <!-- Cada imagen es un enlace: cambia el href (la URL) de cada una -->
+      <div class="car-track" id="car-track" tabindex="0" aria-label="Próximos eventos">
+        <a class="slide" href="https://docs.google.com/forms/d/e/1FAIpQLScPmMQ190IaRHv7w8ooQsCTIm0i256RLwa7kmADpZfKK2hXeA/viewform?usp=publish-editor" target="_blank" rel="noopener" data-label="Inscribirme ↗"><img src="img/portada.jpg" width="1240" height="1600" alt="VI Simposio de investigaciones en Microbiología, 20 de noviembre"></a>
+        <a class="slide vacio" href="PEGA_AQUI_URL_EVENTO_2" target="_blank" rel="noopener" data-label="Abrir enlace ↗"><img src="img/evento-2.jpg" alt="Evento 2" onload="this.parentNode.classList.remove('vacio')" onerror="this.remove()"><span>Próximo evento<br>img/evento-2.jpg</span></a>
+        <a class="slide vacio" href="PEGA_AQUI_URL_EVENTO_3" target="_blank" rel="noopener" data-label="Abrir enlace ↗"><img src="img/evento-3.jpg" alt="Evento 3" onload="this.parentNode.classList.remove('vacio')" onerror="this.remove()"><span>Próximo evento<br>img/evento-3.jpg</span></a>
+      </div>
+      <button class="car-b prev" id="car-prev" aria-label="Anterior">‹</button>
+      <button class="car-b next" id="car-next" aria-label="Siguiente">›</button>
+      <div class="car-dots" id="car-dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. NOSOTROS ============ -->
+<section id="nosotros" class="pad">
+  <div class="wrap">
+    <h2 class="titulo">Nosotros</h2>
+    <p class="titulo-ja">El semillero y el Instituto de Investigaciones Biológicas del Trópico</p>
+    <div class="dos">
+      <div class="tarjeta">
+        <h3>Semillero de Investigación</h3>
+        <p>Grupo de formación científica para estudiantes de pregrado que buscan adentrase en las areas de la Salud, Medicina Veterinaria, Zootecnia, Biología, Alimentación y carreras afines</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Instituto de Investigaciones Biológicas del Trópico (IIBT)</h3>
+        <p>Centro científico adscrito a la facultad de Medicina Veterinaria y Zootecnia de la Universidad de Cordoba, Ubicado en la Sede de Berastégui, Colombia</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. PROYECTO ============ -->
+<section id="proyecto" class="pad oscuro">
+  <div class="wrap">
+    <h2 class="titulo">Proyectos</h2>
+    <p class="titulo-ja">Semillero del Instituto de Investigaciones Biológicas del Trópico</p>
+    <div class="proyecto-box">
+      <span class="etiqueta">Retos Unicórdoba</span><span class="etiqueta">SIRU-FMV-01-25</span>
+      <h3>«Salud integral: nuevos enfoques integrados y su impacto en jóvenes universitarios del lugar de desarrollo Berástegui»</h3>
+      <p style="margin:0">Agrega aquí el resumen del proyecto: objetivo, población, actividades (alimentación saludable, yoga, rumbaterapia, educación menstrual, encuesta CAP) y resultados esperados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. FORMULARIOS Y ENCUESTAS (antes "News") ============ -->
+<section id="formularios" class="pad">
+  <div class="wrap">
+    <h2 class="titulo">Formularios y encuestas</h2>
+    <p class="titulo-ja">Inscríbete a las actividades y participa en las encuestas</p>
     <div class="enlaces-grid">
       <a class="btn-enlace btn-verde" href="https://docs.google.com/forms/d/e/1FAIpQLSfe7s_9kLDxvZtKmk9A-QseTbqUU8XC41b7YAN32f82kFJQTw/viewform?usp=header" target="_blank" rel="noopener">Alimentación saludable</a>
       <a class="btn-enlace btn-celeste" href="https://docs.google.com/forms/d/e/1FAIpQLSfTboGtpWZ0QoBQsNVfs656beKsW1Od1tiyh4LuGrRVijDpUg/viewform?usp=header" target="_blank" rel="noopener">Masterclass Yoga</a>
       <a class="btn-enlace btn-morado" href="https://docs.google.com/forms/d/e/1FAIpQLScVZ3qb8AVjGLTqA2Nxq6bMddiRk7OkJAFrDbkaGSn4SyzDJA/viewform?usp=header" target="_blank" rel="noopener">Rumbaterapia</a>
       <a class="btn-enlace btn-rosado" href="https://docs.google.com/forms/d/e/1FAIpQLScxkcXMci_lyElHwW9znXwTKrSzv9hU81qCrXwPCzmbZTtxEw/viewform?usp=header" target="_blank" rel="noopener">Educación Menstrual</a>
-     // //
-      <a class="btn-enlace btn-encuesta" href="https://forms.gle/RMx8saGEp5qdFkFj7" target="_blank" rel="noopener">Formulario Salud Integral</a>
+      <a class="btn-enlace btn-encuesta" href="https://docs.google.com/forms/d/e/1FAIpQLSfvsbPIeuHIJfZQdqMS5V8mTyYU_I0gCG-WwUIUbKyyPVWrcA/viewform?usp=header" target="_blank" rel="noopener">Encuesta CAP</a>
+      <a class="btn-enlace btn-simposio" href="https://docs.google.com/forms/d/e/1FAIpQLScPmMQ190IaRHv7w8ooQsCTIm0i256RLwa7kmADpZfKK2hXeA/viewform?usp=publish-editor" target="_blank" rel="noopener">VI SIMPOSIO DE INVESTIGACIONES EN MICROBIOLOGIA</a>
     </div>
-   <h2>Admision como Estudiante</h2>
-  </section>
-  
-  <form id="formulario-semillero" action="#" method="POST">
+      </div>
+</section>
 
-    <div class="grupo">
-      <label for="identificacion">Número de identificación<span class="req">*</span></label>
-      <input type="text" id="identificacion" name="identificacion" inputmode="numeric" pattern="[0-9]*" required placeholder="Ej: 1043xxxxxx">
+<!-- ============ 5. MEMORIAS Y REDES SOCIALES ============ -->
+<section id="memorias" class="pad oscuro">
+  <div class="wrap" style="max-width:1100px">
+    <h2 class="titulo">Memorias y redes</h2>
+    <p class="titulo-ja">Revive nuestros eventos y entérate primero de las convocatorias</p>
+    <div class="mem-grid">
+      <button class="mem" data-tipo="img" aria-label="Ampliar memoria 1"><img src="img/memoria-1.jpg" alt="Memoria 1" loading="lazy" onerror="this.remove()"><span>Memoria 1<br>img/memoria-1.jpg</span><b class="ic">+</b></button>
+      <button class="mem" data-tipo="img" aria-label="Ampliar memoria 2"><img src="img/memoria-2.jpg" alt="Memoria 2" loading="lazy" onerror="this.remove()"><span>Memoria 2<br>img/memoria-2.jpg</span><b class="ic">+</b></button>
+      <button class="mem" data-tipo="img" aria-label="Ampliar memoria 3"><img src="img/memoria-3.jpg" alt="Memoria 3" loading="lazy" onerror="this.remove()"><span>Memoria 3<br>img/memoria-3.jpg</span><b class="ic">+</b></button>
+      <button class="mem" data-tipo="img" aria-label="Ampliar memoria 4"><img src="img/memoria-4.jpg" alt="Memoria 4" loading="lazy" onerror="this.remove()"><span>Memoria 4<br>img/memoria-4.jpg</span><b class="ic">+</b></button>
+      <!-- VIDEO: pega en data-video un enlace de YouTube, Facebook, Instagram o un .mp4 (ej. img/video-1.mp4).
+           data-poster es opcional (imagen de portada del video). Si el video es vertical, agrega data-formato="vertical". -->
+      <button class="mem video" data-tipo="video" data-video="PEGA_AQUI_URL_VIDEO" data-poster="" aria-label="Reproducir video"><span>Video de memorias<br>pega el enlace</span><b class="ic">▶</b></button>
     </div>
-
-    <div class="grupo fila">
-      <div>
-        <label for="nombres">Nombres<span class="req">*</span></label>
-        <input type="text" id="nombres" name="nombres" required placeholder="Nombres completos">
-      </div>
-      <div>
-        <label for="apellidos">Apellidos<span class="req">*</span></label>
-        <input type="text" id="apellidos" name="apellidos" required placeholder="Apellidos completos">
-      </div>
+    <h3 class="redes-t">Síguenos</h3>
+    <div class="redes">
+      <a href="https://www.instagram.com/semilleroiibt/" target="_blank" rel="noopener">Instagram</a>
+      <a href="PEGA_AQUI_FACEBOOK" target="_blank" rel="noopener">Facebook</a>
+      <a href="PEGA_AQUI_YOUTUBE" target="_blank" rel="noopener">YouTube</a>
+      <a href="PEGA_AQUI_TIKTOK" target="_blank" rel="noopener">TikTok</a>
+      <a href="mailto:PEGA_AQUI_CORREO">Correo</a>
     </div>
+  </div>
+</section>
 
-    <div class="grupo fila">
-      <div>
-        <label for="fecha-vinculacion">Fecha de vinculación<span class="req">*</span></label>
-        <input type="date" id="fecha-vinculacion" name="fecha_vinculacion" required>
+<!-- ============ 7. REGISTRO DE NUEVOS INTEGRANTES ============ -->
+<section id="registro" class="pad">
+  <div class="wrap">
+    <h2 class="titulo" style="color:var(--verde-hoja)">Únete al semillero</h2>
+    <p class="titulo-ja">Completa tus datos para ingresar oficialmente. Al finalizar podrás unirte a nuestro grupo de WhatsApp.</p>
+
+    <form id="formulario-semillero" action="#" method="POST">
+      <div class="grupo">
+        <label for="identificacion">Número de identificación<span class="req">*</span></label>
+        <input type="text" id="identificacion" name="identificacion" inputmode="numeric" pattern="[0-9]*" required placeholder="Ej: 1043xxxxxx">
       </div>
-      <div>
-        <label for="programa">Programa académico o dependencia<span class="req">*</span></label>
-        <input type="text" id="programa" name="programa" required placeholder="Ej: Ingeniería de Sistemas">
+      <div class="grupo fila">
+        <div>
+          <label for="nombres">Nombres<span class="req">*</span></label>
+          <input type="text" id="nombres" name="nombres" required placeholder="Nombres completos">
+        </div>
+        <div>
+          <label for="apellidos">Apellidos<span class="req">*</span></label>
+          <input type="text" id="apellidos" name="apellidos" required placeholder="Apellidos completos">
+        </div>
       </div>
-    </div>
-
-    <div class="grupo fila">
-      <div>
-        <label for="correo">Correo electrónico<span class="req">*</span></label>
-        <input type="email" id="correo" name="correo" required placeholder="nombre@correo.com">
+      <div class="grupo fila">
+        <div>
+          <label for="fecha-vinculacion">Fecha de vinculación<span class="req">*</span></label>
+          <input type="date" id="fecha-vinculacion" name="fecha_vinculacion" required>
+        </div>
+        <div>
+          <label for="programa">Programa académico o dependencia<span class="req">*</span></label>
+          <input type="text" id="programa" name="programa" required placeholder="Ej: Medicina Veterinaria">
+        </div>
       </div>
-      <div>
-        <label for="contacto">Número de contacto<span class="req">*</span></label>
-        <input type="tel" id="contacto" name="contacto" required placeholder="Ej: 300 123 4567">
+      <div class="grupo fila">
+        <div>
+          <label for="correo">Correo electrónico<span class="req">*</span></label>
+          <input type="email" id="correo" name="correo" required placeholder="nombre@correo.com">
+        </div>
+        <div>
+          <label for="contacto">Número de contacto<span class="req">*</span></label>
+          <input type="tel" id="contacto" name="contacto" required placeholder="Ej: 300 123 4567">
+        </div>
       </div>
-    </div>
 
-    <fieldset>
-      <legend>Autorización de datos</legend>
-      <p class="autorizacion-texto">
-        Autorizo el tratamiento de mis datos personales de acuerdo con la Ley 1581 de 2012
-        y demás normas concordantes, con la finalidad exclusiva de gestionar mi vinculación
-        y participación en las actividades del semillero de investigación. Entiendo que
-        puedo conocer, actualizar, rectificar o solicitar la eliminación de mis datos en
-        cualquier momento.
-      </p>
-      <div class="checkbox-linea">
-        <input type="checkbox" id="autorizacion" name="autorizacion" required>
-        <label for="autorizacion">Sí, autorizo el tratamiento de mis datos personales.<span class="req">*</span></label>
+      <fieldset>
+
+        <legend>
+          <h2></h2>Autorización de datos</legend>
+        <p class="autorizacion-texto">
+          Autorizo el tratamiento de mis datos personales de acuerdo con la Ley 1581 de 2012
+          y demás normas concordantes, con la finalidad exclusiva de gestionar mi vinculación
+          y participación en las actividades del semillero de investigación. Entiendo que
+          puedo conocer, actualizar, rectificar o solicitar la eliminación de mis datos en
+          cualquier momento.
+        </p>
+        <div class="checkbox-linea">
+          <input type="checkbox" id="autorizacion" name="autorizacion" required>
+          <label for="autorizacion">Sí, autorizo el tratamiento de mis datos personales.<span class="req">*</span></label>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="enviar" id="boton-enviar">Enviar inscripción</button>
+
+      <div class="paso-whatsapp" id="paso-whatsapp">
+        <p>¡Registro recibido! Ahora únete a nuestro grupo de WhatsApp para recibir novedades del semillero.</p>
+        <a class="boton-whatsapp" id="link-whatsapp" href="https://chat.whatsapp.com/DK9U4wuIN8v4EBdm44aNEZ" target="_blank" rel="noopener">Unirme al grupo de WhatsApp</a>
       </div>
-    </fieldset>
+    </form>
+  </div>
+</section>
 
-    <button type="submit" class="enviar" id="boton-enviar">Enviar inscripción</button>
-
-    <div class="paso-whatsapp" id="paso-whatsapp">
-      <p>¡Registro recibido! Ahora únete a nuestro grupo de WhatsApp para recibir novedades del semillero.</p>
-      <!-- Reemplaza el enlace de abajo por el link real de invitación de tu grupo de WhatsApp -->
-      <a class="boton-whatsapp" id="link-whatsapp" href="https://chat.whatsapp.com/DK9U4wuIN8v4EBdm44aNEZ" target="_blank" rel="noopener">
-        Unirme al grupo de WhatsApp
-      </a>
-    </div>
-
-  </form>
 </main>
 
-<footer>
-  Semillero de Investigación · Formulario de vinculación
+<footer id="colaboradores">
+  <div class="wrap" style="max-width:1100px">
+    <h2 class="foot-t">Colaboradores</h2>
+    <p class="foot-s">Instituciones y aliados que hacen posible el semillero</p>
+    <div class="col-grid">
+      <div class="slot contain"><img src="img/colaborador-1.png" alt="Colaborador 1" onerror="this.remove()"><span>colaborador-1.png</span></div><div class="slot contain"><img src="img/colaborador-2.png" alt="Colaborador 2" onerror="this.remove()"><span>colaborador-2.png</span></div><div class="slot contain"><img src="img/colaborador-3.png" alt="Colaborador 3" onerror="this.remove()"><span>colaborador-3.png</span></div><div class="slot contain"><img src="img/colaborador-4.png" alt="Colaborador 4" onerror="this.remove()"><span>colaborador-4.png</span></div>
+    </div>
+    <div class="foot-marca">
+      <span class="logos">
+        <img class="l-sem" src="img/logo-semilleroiibt.jpeg" alt="Semillero IIBT" onerror="this.onerror=null;this.src='logo-semilleroiibt.jpg'">
+        <span class="l-sep"></span>
+        <img class="l-uni" src="img/logo-universidad.png" alt="Universidad de Córdoba">
+      </span>
+      <span>Semillero de Investigaciones Biológicas del Trópico · Universidad de Córdoba · Sitio oficial</span>
+    </div>
+  </div>
 </footer>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visor de memorias">
+  <button class="lb-x" id="lb-x" aria-label="Cerrar">×</button>
+  <button class="lb-p" id="lb-p" aria-label="Anterior">‹</button>
+  <div class="lb-body" id="lb-body"></div>
+  <button class="lb-n" id="lb-n" aria-label="Siguiente">›</button>
+</div>
+
+
 <script>
-  // ⚠️ PEGA AQUÍ la URL de tu aplicación web de Google Apps Script (termina en /exec)
+  // Menú móvil
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  burger.addEventListener('click', function(){
+    const abierto = menu.classList.toggle('abierto');
+    burger.setAttribute('aria-expanded', abierto);
+  });
+  menu.addEventListener('click', function(e){
+    if (e.target.closest('a')) { menu.classList.remove('abierto'); burger.setAttribute('aria-expanded', false); }
+  });
+
+  // Registro → Google Sheets (sin cambios respecto a tu versión)
   const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbyYkvtN_DXkvTZc6W0YqE3haKkzE8JkyLFTuRcnfGNctkT96TzibdIjODwy9D-oh7U4/exec";
 
   const formulario = document.getElementById('formulario-semillero');
@@ -507,12 +459,6 @@
 
   formulario.addEventListener('submit', function(evento){
     evento.preventDefault();
-
-    if (URL_GOOGLE_SHEETS === "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT") {
-      alert('Falta configurar la URL de Google Sheets en el código (variable URL_GOOGLE_SHEETS).');
-      return;
-    }
-
     botonEnviar.disabled = true;
     botonEnviar.textContent = 'Enviando...';
 
@@ -529,8 +475,6 @@
 
     fetch(URL_GOOGLE_SHEETS, {
       method: 'POST',
-      // 'no-cors' es necesario porque Apps Script no siempre responde con encabezados CORS,
-      // pero el envío sí se procesa correctamente en la hoja de cálculo.
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(datos)
@@ -548,6 +492,76 @@
     });
   });
 </script>
+<script>
+// Enlaces aún sin configurar: no hacen nada
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="PEGA_AQUI"]');if(a)e.preventDefault();});
 
+/* ----- Carrusel de eventos ----- */
+(function(){
+  var tr=document.getElementById('car-track'),dots=document.getElementById('car-dots');
+  var sl=[].slice.call(tr.querySelectorAll('.slide')),cur=0,parar=false;
+  sl.forEach(function(_,i){var d=document.createElement('i');d.onclick=function(){ir(i,true)};dots.appendChild(d)});
+  function ir(i,u){cur=(i+sl.length)%sl.length;if(u)parar=true;var el=sl[cur];tr.scrollTo({left:el.offsetLeft-(tr.clientWidth-el.clientWidth)/2,behavior:'smooth'})}
+  function marca(){var c=tr.scrollLeft+tr.clientWidth/2,m=0,b=1e9;sl.forEach(function(el,i){var d=Math.abs(el.offsetLeft+el.clientWidth/2-c);if(d<b){b=d;m=i}});cur=m;[].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===m)})}
+  tr.addEventListener('scroll',marca,{passive:true});marca();
+  document.getElementById('car-prev').onclick=function(){ir(cur-1,true)};
+  document.getElementById('car-next').onclick=function(){ir(cur+1,true)};
+  ['pointerdown','wheel','focusin'].forEach(function(ev){tr.addEventListener(ev,function(){parar=true},{passive:true})});
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(function(){if(!parar&&!document.hidden&&sl.length>1)ir(cur+1)},5000);
+})();
+
+/* ----- Visor de memorias (imágenes y videos) ----- */
+(function(){
+  var lb=document.getElementById('lb'),body=document.getElementById('lb-body'),lista=[],pos=0;
+  function embed(u){var m;
+    if(m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{11})/))return{t:'f',s:'https://www.youtube.com/embed/'+m[1]+'?autoplay=1&rel=0',p:'https://img.youtube.com/vi/'+m[1]+'/hqdefault.jpg'};
+    if(/facebook\.com|fb\.watch/.test(u))return{t:'f',s:'https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(u)+'&show_text=false&autoplay=true'};
+    if(m=u.match(/instagram\.com\/(p|reel|tv)\/([\w-]+)/))return{t:'f',s:'https://www.instagram.com/'+m[1]+'/'+m[2]+'/embed',alto:1};
+    if(/\.(mp4|webm|mov)(\?|$)/i.test(u))return{t:'v',s:u};
+    return null}
+  // Portada automática de videos de YouTube
+  [].forEach.call(document.querySelectorAll('.mem.video'),function(b){var e=embed(b.dataset.video||'');var p=b.dataset.poster||(e&&e.p);
+    if(p){var i=new Image();i.alt='Video';i.src=p;i.onerror=function(){i.remove()};b.insertBefore(i,b.firstChild)}});
+  function valido(b){if(b.dataset.tipo==='video')return !!embed(b.dataset.video||'');var i=b.querySelector('img');return !!(i&&i.complete&&i.naturalWidth)}
+  function mostrar(){var b=lista[pos];body.innerHTML='';
+    if(b.dataset.tipo==='video'){var e=embed(b.dataset.video),el;
+      if(e.t==='v'){el=document.createElement('video');el.src=e.s;el.controls=true;el.autoplay=true;el.playsInline=true}
+      else{el=document.createElement('iframe');el.src=e.s;el.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';el.allowFullscreen=true;if(e.alto||b.dataset.formato==='vertical')el.className='alto'}
+      body.appendChild(el)}
+    else{var im=new Image();im.src=b.querySelector('img').src;im.alt=b.getAttribute('aria-label');body.appendChild(im)}}
+  function abrir(b){lista=[].filter.call(document.querySelectorAll('.mem'),valido);pos=lista.indexOf(b);if(pos<0)return;lb.classList.add('abierto');mostrar()}
+  function cerrar(){lb.classList.remove('abierto');body.innerHTML=''}
+  function mover(d){if(lista.length>1){pos=(pos+d+lista.length)%lista.length;body.style.animation='none';void body.offsetWidth;body.style.animation='';mostrar()}}
+  [].forEach.call(document.querySelectorAll('.mem'),function(b){b.onclick=function(){abrir(b)}});
+  document.getElementById('lb-x').onclick=cerrar;
+  document.getElementById('lb-p').onclick=function(){mover(-1)};
+  document.getElementById('lb-n').onclick=function(){mover(1)};
+  lb.addEventListener('click',function(e){if(e.target===lb)cerrar()});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('abierto'))return;if(e.key==='Escape')cerrar();if(e.key==='ArrowLeft')mover(-1);if(e.key==='ArrowRight')mover(1)});
+})();
+
+/* ----- Animaciones al hacer scroll ----- */
+function activar(){
+  var grupos=[['.hero-txt > *',''],['.car','der'],['.titulo',''],['.titulo-ja',''],['.tarjeta','izq'],['.proyecto-box','zoom'],['.btn-enlace','zoom'],['.mem','zoom'],['.redes-t',''],['.redes a',''],['form .grupo',''],['fieldset',''],['.enviar',''],['.col-grid .slot','zoom'],['.foot-t',''],['.foot-marca','']];
+  var els=[];
+  grupos.forEach(function(g){[].forEach.call(document.querySelectorAll(g[0]),function(el,i){
+    el.classList.add('rv');if(g[1])el.classList.add(g[1]);
+    if(g[0]==='.tarjeta'&&i%2)el.classList.replace('izq','der');
+    el.style.setProperty('--d',Math.min(i%6,5));els.push(el)})});
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){var el=x.target;el.classList.add('in');io.unobserve(el);
+    setTimeout(function(){el.classList.remove('rv','in','izq','der','zoom');el.style.removeProperty('--d')},1600)}})},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){io.observe(el)});
+}
+
+/* ----- Intro de primera visita (para verla de nuevo: agrega ?intro a la dirección) ----- */
+(function(){
+  var intro=document.getElementById('intro'),root=document.documentElement;
+  function fin(){if(!intro.parentNode)return;intro.classList.add('salir');root.classList.remove('con-intro');
+    try{localStorage.setItem('intro-vista','1')}catch(e){}
+    setTimeout(function(){intro.remove();activar()},950)}
+  if(root.classList.contains('con-intro')){setTimeout(fin,2700);intro.addEventListener('click',fin)}
+  else{intro.remove();activar()}
+})();
+</script>
 </body>
 </html>

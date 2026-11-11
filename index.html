@@ -150,7 +150,11 @@ button.enviar:disabled{background:#a9b6b0;cursor:not-allowed}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding-top:2rem}.cta.sec{margin:.6rem 0 0}.car-b.prev{left:4px}.car-b.next{right:4px}}
 
 /* ---------- Memorias y redes ---------- */
-.mem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.1rem}
+.mem-grid{position:relative}
+.mem-car .car-b{top:42%}
+.mem-grid{display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar.width:none;padding:1rem .5rem 1.4rem}
+.mem-grid::-wedkit-scrollbar{display:none}
+.mem-grid .mem{flex:0 0 min(260px,72vw);scroll-snap-align:start}
 .mem{position:relative;aspect-ratio:4/5;padding:0;border:1px solid rgba(38,166,12,.35);border-radius:10px;overflow:hidden;background:#0d2a17;cursor:zoom-in;color:var(--verde-claro);font:.78rem var(--f-tech);display:flex;align-items:center;justify-content:center;text-align:center;transition:transform .35s,box-shadow .35s,border-color .35s}
 .mem img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .5s}
 .mem.video img{object-fit:cover}
@@ -322,7 +326,10 @@ html.con-intro,html.con-intro body{overflow:hidden}
   <div class="wrap" style="max-width:1100px">
     <h2 class="titulo">Memorias y redes</h2>
     <p class="titulo-ja">Revive nuestros eventos y entérate primero de las convocatorias</p>
-    <div class="mem-grid">
+    <div class="mem-car">
+<button class="car-b prev" id="mem-prev" aria-label="Anterior">‹</button>
+<button class="car-b next" id="mem-next" aria-label="Siguiente">›</button>
+<div class="mem-grid" id="mem-grid">
       <button class="mem" data-tipo="img" aria-label="Ampliar memoria 1"><img src="img/memoria-1.jpg" alt="Memoria 1" loading="lazy" onerror="this.remove()"><span>Memoria 1<br>img/memoria-1.jpg</span><b class="ic">+</b></button>
       <button class="mem" data-tipo="img" aria-label="Ampliar memoria 2"><img src="img/memoria-2.jpg" alt="Memoria 2" loading="lazy" onerror="this.remove()"><span>Memoria 2<br>img/memoria-2.jpg</span><b class="ic">+</b></button>
       <button class="mem" data-tipo="img" aria-label="Ampliar memoria 3"><img src="img/memoria-3.jpg" alt="Memoria 3" loading="lazy" onerror="this.remove()"><span>Memoria 3<br>img/memoria-3.jpg</span><b class="ic">+</b></button>
@@ -330,6 +337,7 @@ html.con-intro,html.con-intro body{overflow:hidden}
       <!-- VIDEO: pega en data-video un enlace de YouTube, Facebook, Instagram o un .mp4 (ej. img/video-1.mp4).
            data-poster es opcional (imagen de portada del video). Si el video es vertical, agrega data-formato="vertical". -->
       <button class="mem video" data-tipo="video" data-video="PEGA_AQUI_URL_VIDEO" data-poster="" aria-label="Reproducir video"><span>Video de memorias<br>pega el enlace</span><b class="ic">▶</b></button>
+    </div>
     </div>
     <h3 class="redes-t">Síguenos</h3>
     <div class="redes">
@@ -563,6 +571,11 @@ function activar(){
   if(root.classList.contains('con-intro')){setTimeout(fin,2700);intro.addEventListener('click',fin)}
   else{intro.remove();activar()}
 })();
+  (function(){
+  var g=document.getElementById('mem-grid');
+  function paso(d){g.scrollBy({left:d*(g.querySelector('.mem').offsetWidth+18),behavior:'smooth'})}
+  document.getElementById('mem-prev').onclick=function(){paso(-1)};
+  document.getElementById('mem-next').onclick=function(){paso(1)};
 </script>
 </body>
 </html>

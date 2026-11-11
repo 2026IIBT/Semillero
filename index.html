@@ -150,10 +150,10 @@ button.enviar:disabled{background:#a9b6b0;cursor:not-allowed}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr;padding-top:2rem}.cta.sec{margin:.6rem 0 0}.car-b.prev{left:4px}.car-b.next{right:4px}}
 
 /* ---------- Memorias y redes ---------- */
-.mem-grid{position:relative}
+.mem-car{position:relative}
 .mem-car .car-b{top:42%}
-.mem-grid{display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar.width:none;padding:1rem .5rem 1.4rem}
-.mem-grid::-wedkit-scrollbar{display:none}
+.mem-grid{display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:1rem .5rem 1.4rem}
+.mem-grid::-webkit-scrollbar{display:none}
 .mem-grid .mem{flex:0 0 min(260px,72vw);scroll-snap-align:start}
 .mem{position:relative;aspect-ratio:4/5;padding:0;border:1px solid rgba(38,166,12,.35);border-radius:10px;overflow:hidden;background:#0d2a17;cursor:zoom-in;color:var(--verde-claro);font:.78rem var(--f-tech);display:flex;align-items:center;justify-content:center;text-align:center;transition:transform .35s,box-shadow .35s,border-color .35s}
 .mem img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .5s}
@@ -237,11 +237,10 @@ html.con-intro,html.con-intro body{overflow:hidden}
     <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menú</button>
     <nav class="nav" id="menu" aria-label="Principal">
       <ul>
-        <li><a href="#portada">Portada<small>Eventos</small></a></li>
         <li><a href="#nosotros">Nosotros<small>Semillero e IIBT</small></a></li>
-        <li><a href="#proyecto">Proyectos<small>Retos Unicórdoba</small></a></li>
+        <li><a href="#proyecto">Proyectos</a></li>
         <li><a href="#formularios">Formularios<small>Encuestas</small></a></li>
-        <li><a href="#memorias">Memorias<small>Videos y redes</small></a></li>
+        <li><a href="#memorias">Memorias</a></li>
         <li><a class="btn-contacto" href="#registro">Únete<small>Inscripción</small></a></li>
       </ul>
     </nav>
@@ -606,6 +605,7 @@ function activar(){
   function paso(d){g.scrollBy({left:d*(g.querySelector('.mem').offsetWidth+18),behavior:'smooth'})}
   document.getElementById('mem-prev').onclick=function(){paso(-1)};
   document.getElementById('mem-next').onclick=function(){paso(1)};
+})();
 </script>
 </body>
 </html>

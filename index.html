@@ -212,6 +212,7 @@ html.con-intro,html.con-intro body{overflow:hidden}
 .js .rv.in{opacity:1;transform:none}
 .titulo::after{content:"";display:block;height:4px;width:0;background:var(--verde);margin-top:.5rem;transition:width .9s .35s}
 .titulo.in::after,.titulo:not(.rv)::after{width:70px}
+.car-track{overflow-x:hidden;scroll-snap-type:none;cursor:default}
 </style>
 </head>
 <body>
@@ -508,15 +509,44 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href^="P
 /* ----- Carrusel de eventos ----- */
 (function(){
   var tr=document.getElementById('car-track'),dots=document.getElementById('car-dots');
-  var sl=[].slice.call(tr.querySelectorAll('.slide')),cur=0,parar=false;
+  var sl=[].slice.call(tr.querySelectorAll('.slide')),cur=0,ultimo=0,anim=0,x0=null;
   sl.forEach(function(_,i){var d=document.createElement('i');d.onclick=function(){ir(i,true)};dots.appendChild(d)});
-  function ir(i,u){cur=(i+sl.length)%sl.length;if(u)parar=true;var el=sl[cur];tr.scrollTo({left:el.offsetLeft-(tr.clientWidth-el.clientWidth)/2,behavior:'smooth'})}
-  function marca(){var c=tr.scrollLeft+tr.clientWidth/2,m=0,b=1e9;sl.forEach(function(el,i){var d=Math.abs(el.offsetLeft+el.clientWidth/2-c);if(d<b){b=d;m=i}});cur=m;[].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===m)})}
-  tr.addEventListener('scroll',marca,{passive:true});marca();
+  function destino(i){
+    var el=sl[i],max=tr.scrollWidth-tr.clientWidth;
+    var x=el.getBoundingClientRect().left-tr.getBoundingClientRect().left+tr.scrollLeft-(tr.clientWidth-el.clientWidth)/2;
+    return Math.max(0,Math.min(max,x));
+  }
+  function mover(a){ // animación propia: no depende de scroll-behavior ni de scroll-snap
+    var de=tr.scrollLeft,t0=null,dur=650;cancelAnimationFrame(anim);
+    function paso(t){
+      if(t0===null)t0=t;
+      var p=Math.min((t-t0)/dur,1),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+      tr.scrollLeft=de+(a-de)*e;
+      if(p<1)anim=requestAnimationFrame(paso);
+    }
+    anim=requestAnimationFrame(paso);
+  }
+  function marca(){[].forEach.call(dots.children,function(d,k){d.classList.toggle('on',k===cur)})}
+  function ir(i,manual){
+    cur=(i+sl.length)%sl.length;
+    if(manual)ultimo=Date.now();
+    mover(destino(cur));marca();
+  }
   document.getElementById('car-prev').onclick=function(){ir(cur-1,true)};
   document.getElementById('car-next').onclick=function(){ir(cur+1,true)};
-  ['pointerdown','wheel','focusin'].forEach(function(ev){tr.addEventListener(ev,function(){parar=true},{passive:true})});
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(function(){if(!parar&&!document.hidden&&sl.length>1)ir(cur+1)},5000);
+  // Celular: deslizar con el dedo
+  tr.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  tr.addEventListener('touchend',function(e){
+    if(x0===null)return;
+    var d=e.changedTouches[0].clientX-x0;x0=null;
+    if(Math.abs(d)>40)ir(cur+(d<0?1:-1),true);
+  },{passive:true});
+  // Avance automático cada 4,5 s (se retrasa 6 s después de usar las flechas)
+  setInterval(function(){
+    if(!document.hidden&&sl.length>1&&Date.now()-ultimo>6000)ir(cur+1);
+  },4500);
+  window.addEventListener('resize',function(){tr.scrollLeft=destino(cur)});
+  marca();
 })();
 
 /* ----- Visor de memorias (imágenes y videos) ----- */
